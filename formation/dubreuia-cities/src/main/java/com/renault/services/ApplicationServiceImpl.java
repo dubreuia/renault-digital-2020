@@ -60,6 +60,9 @@ public class ApplicationServiceImpl implements ApplicationService {
         cityRepository.save(montreal);
         cityRepository.save(laval);
 
+        Country japan = new Country("Japan", Language.JA);
+        countryRepository.save(japan);
+
         User user = new User("Alex");
         user.setFollowedCities(List.of(paris, montreal));
         userRepository.save(user);

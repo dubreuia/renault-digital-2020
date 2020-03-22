@@ -19,7 +19,7 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = CitiesApplication.class, webEnvironment = RANDOM_PORT)
-public class LanguageTest extends TestIntegration {
+public class Part0LanguageTest extends TestCitiesApplication {
 
     @Test
     public void should_GET_root_language_returns_all_languages() {
@@ -27,13 +27,10 @@ public class LanguageTest extends TestIntegration {
         JsonArray jsonArray = jsonReader.readArray();
         assertEquals(Language.values().length, jsonArray.size());
         List<Language> languages = asList(Language.values());
-        jsonArray.getValuesAs(JsonString.class)
-                .stream()
+        jsonArray.getValuesAs(JsonString.class).stream()
                 .map(JsonString::getString)
                 .map(Language::fromName)
-                .forEach(language -> {
-                    assertTrue(languages.contains(language.orElseThrow()));
-                });
+                .forEach(l -> assertTrue(languages.contains(l.orElseThrow())));
     }
 
 }

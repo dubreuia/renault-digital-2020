@@ -120,7 +120,7 @@ public enum Language {
     NR("South Ndebele"),
     OC("Occitan"),
     OJ("Ojibwa"),
-    CU("Church Slavic, Old Slavonic, Church Slavonic, Old Bulgarian, Old Church Slavonic"),
+    CU("Church Slavic"),
     OM("Oromo"),
     OR("Oriya"),
     OS("Ossetian, Ossetic"),

@@ -6,6 +6,14 @@ public class RegionDto {
 
     private String name;
 
+    public RegionDto() {
+    }
+
+    public RegionDto(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public int getId() {
         return id;
     }

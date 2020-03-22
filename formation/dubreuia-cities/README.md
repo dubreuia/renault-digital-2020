@@ -45,6 +45,16 @@ Pour travailler les relations, les transactions, et revoir les contrôleurs, nou
 
 Le backend est à développer en TDD : chaque test unitaire vérifie le bon fonctionnement des différentes parties. Lors de la journée en commun du mercredi, nous allons ajouter le frontend nécessaire pour appeler le backend.
 
+### Partie 0 - `Language` - Échauffement
+
+Un énuméré `Language` a été créé et sera utile pour les pays plus tard. Créer un REST controlleur avec les URLs suivants:
+
+- "/language" (GET) : retourne la liste des langues, avec leur "name", et non leur "code" (par example : {"French", "English", ...})
+
+Vérification :
+
+- Exécuter le test `Part0LanguageTest`
+
 ### Partie 1 - `Country` - Introduction
 
 Créer une nouvelle entitée `Country` avec les propriétés suivantes :
@@ -136,6 +146,12 @@ Créer un REST controlleur avec les URLs suivants :
 - "/user/<user_id>/followCity/<city_id>" (POST) : ajoute pour le user correspondant à l'id, un follow pour la ville correspondant à l'id
 - "/user/<user_id>/followCity/<city_id>" (DELETE) : supprime pour le user correspondant à l'id, un follow pour la ville correspondant à l'id
 - "/user/<user_id>/followCity" (GET) : retourne la liste des villes suivies
+
+### Partie 5 - `@Valid` - Validation
+
+- TODO javax.validation + bean validation
+- TODO sql constraints hibernate
+
 
 ## Outline
 
