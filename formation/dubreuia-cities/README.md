@@ -1,5 +1,36 @@
 # Cities
 
+## Installation
+
+Using MySQL:
+
+- Install [docker](https://www.docker.com/get-started)
+- Run latest mysql image `docker run --name mysql_renault -e MYSQL_ROOT_PASSWORD=12345 -d mysql:latest`
+- Make sure the "mysql_renault" image is running `docker ps` (use port in application.yml)
+- Use inspect to find the IP of the running docker `docker inspect mysql_renault` (use IP in application.yml)
+
+Using Postgresql:
+
+- Use Frank's installation
+
+## Start the server
+
+Configure the database in [application.yml](./src/main/resources/application.yml) with chosen database. In this folder, start the Spring Boot server (on [http://localhost:8008](http://localhost:8008)):
+
+```bash
+# Linux & MacOS
+./gradlew bootRun
+
+# Windows
+gradlew bootRun
+```
+
+## References
+
+- https://dzone.com/articles/how-does-spring-transactional
+
+## Outline
+
 - spring web
     - context web : https://www.baeldung.com/spring-web-contexts
 - hibernate / jpa
@@ -40,4 +71,6 @@
         - TODO join fetch (eager only)
         - https://www.baeldung.com/hibernate-fetchmode#fetchmode-vs-fetchtype
     - cascading : https://www.baeldung.com/jpa-cascade-types
+        - TODO
+    - spring object mapping : https://www.baeldung.com/entity-to-and-from-dto-for-a-java-spring-application
         - TODO
