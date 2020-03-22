@@ -7,10 +7,20 @@ spring:
         username: root
         # password: toto
         password: 12345
-
     jpa:
         properties:
             hibernate:
                 # POSTGRES: change dialect for postgresql or mysql
                 # dialect: org.hibernate.dialect.PostgreSQL95Dialect
                 dialect: org.hibernate.dialect.MySQLDialect
+                show-sql: true
+
+logging:
+    level:
+        org:
+            hibernate:
+                SQL: DEBUG
+                type:
+                    descriptor:
+                        sql:
+                            BasicBinder: TRACE

@@ -4,4 +4,6 @@ public interface ApplicationService {
 
     void deleteAll();
 
+    void insertData();
+
 }

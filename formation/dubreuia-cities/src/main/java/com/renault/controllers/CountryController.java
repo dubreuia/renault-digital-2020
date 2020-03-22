@@ -5,6 +5,7 @@ import com.renault.entities.Country;
 import com.renault.entities.Language;
 import com.renault.services.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +22,7 @@ import java.util.List;
 
 import static java.lang.String.format;
 import static java.util.stream.Collectors.toList;
+import static org.springframework.http.HttpStatus.NOT_ACCEPTABLE;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @CrossOrigin
@@ -53,7 +55,12 @@ public class CountryController extends HttpServlet {
 
     @DeleteMapping("/{id}")
     public void deleteCountry(@PathVariable("id") int id) {
-        countryService.deleteCountry(id);
+        try {
+            countryService.deleteCountry(id);
+        } catch (DataIntegrityViolationException e) {
+            throw new HttpClientErrorException(NOT_ACCEPTABLE,
+                    format("Country '%s' still used", id));
+        }
     }
 
     @PutMapping("")

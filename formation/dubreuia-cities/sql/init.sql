@@ -1,8 +1,8 @@
-DROP TABLE user_city;
-DROP TABLE user;
-DROP TABLE city;
-DROP TABLE region;
-DROP TABLE country;
+DROP TABLE IF EXISTS user_city;
+DROP TABLE IF EXISTS user;
+DROP TABLE IF EXISTS city;
+DROP TABLE IF EXISTS region;
+DROP TABLE IF EXISTS country;
 
 CREATE TABLE country
 (
@@ -37,6 +37,7 @@ CREATE TABLE user_city
 (
     user_id INTEGER NOT NULL,
     city_id INTEGER NOT NULL,
+    PRIMARY KEY (user_id, city_id),
     FOREIGN KEY (user_id) REFERENCES user (id),
     FOREIGN KEY (city_id) REFERENCES city (id)
 );

@@ -45,6 +45,7 @@ gradlew bootRun
         - TODO make example on that : https://github.com/eugenp/tutorials/tree/master/persistence-modules/hibernate5-2
         - TODO session factory / save / refresh / flush / contains / dirty
         - TODO refresh : reread, usefull for a clear
+        - TODO failed to lazily initialize a collection of role: com.renault.entities.User.followedCities, could not initialize proxy - no Session
     - unidirectionnal mapping : https://docs.oracle.com/cd/E19798-01/821-1841/bnbqk/index.html
     - bidirectionnal mapping : https://docs.oracle.com/cd/E19798-01/821-1841/bnbqj/index.html
     - one-to-one : https://www.baeldung.com/jpa-one-to-one

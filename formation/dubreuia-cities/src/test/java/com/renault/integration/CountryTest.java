@@ -9,6 +9,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.json.Json;
 import javax.json.JsonArray;
@@ -20,6 +21,7 @@ import java.util.List;
 import static java.lang.String.format;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
@@ -66,7 +68,7 @@ public class CountryTest extends TestIntegration {
     public void should_DELETE_root_remove_existing_country() {
         List<Country> all = countryRepository.findAll();
         Country france = all.stream().filter(country -> "France".equals(country.getName())).findFirst().orElseThrow();
-        delete(format("country/%s", france.getId()));
+        assertThrows(ResponseStatusException.class, () -> delete(format("country/%s", france.getId())));
 
         List<Country> countries = countryRepository.findAll();
         System.out.println(countries);

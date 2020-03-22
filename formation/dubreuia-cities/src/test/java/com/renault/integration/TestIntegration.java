@@ -1,14 +1,7 @@
 package com.renault.integration;
 
 import com.renault.CitiesApplication;
-import com.renault.entities.City;
-import com.renault.entities.Country;
-import com.renault.entities.Language;
-import com.renault.entities.Region;
 import com.renault.services.ApplicationService;
-import com.renault.services.CityService;
-import com.renault.services.CountryService;
-import com.renault.services.RegionService;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -38,30 +31,13 @@ public class TestIntegration {
     @Autowired
     private ApplicationService applicationService;
 
-    @Autowired
-    private CountryService countryService;
-
-    @Autowired
-    private RegionService regionService;
-
-    @Autowired
-    private CityService cityService;
-
     @LocalServerPort
     int port;
 
     @BeforeEach
     public void beforeEach() {
         applicationService.deleteAll();
-
-        Country france = new Country("France", Language.FR);
-        countryService.insertCountry(france);
-
-        Region idf = new Region("IDF", france);
-        regionService.save(idf);
-
-        cityService.save(new City("Paris", idf));
-        cityService.save(new City("Montreuil", idf));
+        applicationService.insertData();
     }
 
     JsonReader get(String path) {
@@ -83,12 +59,16 @@ public class TestIntegration {
         }
     }
 
+    void post(String path) {
+        post(path, null);
+    }
+
     void post(String path, JsonObject body) {
         String query = format("http://localhost:%s/%s", port, path);
         HttpClient client = newHttpClient();
         HttpRequest request = newBuilder()
                 .uri(URI.create(query))
-                .POST(ofString(body.toString()))
+                .POST(ofString(body == null ? "" : body.toString()))
                 .header("Content-Type", "application/json; charset=utf8")
                 .build();
         try {

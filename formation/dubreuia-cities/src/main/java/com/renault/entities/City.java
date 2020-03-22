@@ -6,8 +6,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.util.List;
 
 @Entity
 @Table(name = "city")
@@ -23,6 +25,9 @@ public class City {
     @ManyToOne
     @JoinColumn(name = "region_id")
     private Region region;
+
+    @ManyToMany(mappedBy = "followedCities")
+    private List<User> followedBy;
 
     public City() {
     }
@@ -56,13 +61,37 @@ public class City {
         this.region = region;
     }
 
+    public List<User> getFollowedBy() {
+        return followedBy;
+    }
+
+    public void setFollowedBy(List<User> followedBy) {
+        this.followedBy = followedBy;
+    }
+
     @Override
     public String toString() {
         return "City{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", region=" + region +
                 '}';
     }
-    
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        City city = (City) o;
+        return id == city.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
+    }
+
 }

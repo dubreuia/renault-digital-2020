@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Optional;
 
 @Service
 public class CityServiceImpl implements CityService {
@@ -13,6 +14,12 @@ public class CityServiceImpl implements CityService {
     @Autowired
     private CityRepository cityRepository;
 
+    @Override
+    public Optional<City> findCity(int id) {
+        return cityRepository.findById(id);
+    }
+
+    @Override
     @Transactional
     public void save(City city) {
         cityRepository.save(city);
