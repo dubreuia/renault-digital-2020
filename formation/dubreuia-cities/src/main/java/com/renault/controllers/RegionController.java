@@ -28,6 +28,9 @@ public class RegionController extends HttpServlet {
     @Autowired
     private RegionService regionService;
 
+    // TODO - "/country/<country_id>/region" (GET) : retourne les régions pour le pays correspondant à l'id donné
+    // TODO - "/country/region/<id>" (GET) : retourne la région correspondant à l'id donné
+
     @PostMapping("/{countryId}")
     public void insertRegion(@PathVariable("countryId") int countryId, @RequestBody RegionDto regionDto) {
         Country country = countryService.getCountry(countryId).orElseThrow();

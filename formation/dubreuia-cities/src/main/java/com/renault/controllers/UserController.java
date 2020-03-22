@@ -27,6 +27,8 @@ public class UserController extends HttpServlet {
     @Autowired
     private CityService cityService;
 
+    // TODO - "/user/<user_id>/followCity" (GET) : retourne la liste des villes suivies
+
     @PostMapping("")
     public void insertUser(@RequestBody UserDto userDto) {
         userService.save(new User(userDto.getName()));
