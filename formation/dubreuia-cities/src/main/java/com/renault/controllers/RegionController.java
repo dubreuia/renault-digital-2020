@@ -35,10 +35,11 @@ public class RegionController extends HttpServlet {
     }
 
     @PostMapping("/region")
-    public void insertCountryRegion(@RequestBody CountryRegionDto countryRegionDto) {
-        Language language = Language.fromName(countryRegionDto.getCountryLanguage()).orElseThrow();
-        Country country = new Country(countryRegionDto.getCountryName(), language);
-        regionService.save(country, new Region(countryRegionDto.getRegionName(), country));
+    public void insertCountryRegion(@RequestBody CountryRegionDto dto) {
+        Language language = Language.fromName(dto.getCountryLanguage()).orElseThrow();
+        Country country = new Country(dto.getCountryName(), language);
+        Region region = new Region(dto.getRegionName(), country);
+        regionService.save(country, region);
     }
 
 }

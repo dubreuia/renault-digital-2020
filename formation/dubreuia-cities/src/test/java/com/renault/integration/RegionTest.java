@@ -30,7 +30,7 @@ public class RegionTest extends TestIntegration {
     private RegionRepository regionRepository;
 
     @Test
-    public void should_post_root_add_new_region() {
+    public void should_POST_root_add_new_region() {
         Country country = countryRepository.findAll().stream()
                 .filter(c -> "France".equals(c.getName()))
                 .findFirst().orElseThrow();
@@ -42,13 +42,13 @@ public class RegionTest extends TestIntegration {
     }
 
     @Test
-    public void should_post_region_add_new_region() {
-        JsonObject quebec = Json.createObjectBuilder()
-                .add("countryName", "Canada")
-                .add("countryLanguage", "French")
-                .add("regionName", "Québec")
+    public void should_POST_region_add_new_region() {
+        JsonObject ukMidwest = Json.createObjectBuilder()
+                .add("countryName", "UK")
+                .add("countryLanguage", "English")
+                .add("regionName", "Midwest")
                 .build();
-        post("country/region", quebec);
+        post("country/region", ukMidwest);
 
         List<Region> regions = regionRepository.findAll();
         regions.forEach(region -> System.out.println(region.getName()));

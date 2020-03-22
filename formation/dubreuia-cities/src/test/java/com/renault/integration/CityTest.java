@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +33,20 @@ public class CityTest extends TestIntegration {
 
     @Autowired
     private EntityManager entityManager;
+
+    @Test
+    public void should_POST_region_city_add_new_city() {
+        JsonObject london = Json.createObjectBuilder()
+                .add("countryName", "UK")
+                .add("countryLanguage", "English")
+                .add("regionName", "Mid")
+                .add("cityName", "London")
+                .build();
+        post("country/region/city", london);
+
+        List<City> cities = cityRepository.findAll();
+        cities.forEach(city -> System.out.println(city.getName()));
+    }
 
     @Test
     public void should_POST_follow_city_adds_a_followed_city_for_user() {

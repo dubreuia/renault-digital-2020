@@ -22,7 +22,7 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 public class LanguageTest extends TestIntegration {
 
     @Test
-    public void test() {
+    public void should_GET_root_language_returns_all_languages() {
         JsonReader jsonReader = get("language/");
         JsonArray jsonArray = jsonReader.readArray();
         assertEquals(Language.values().length, jsonArray.size());
