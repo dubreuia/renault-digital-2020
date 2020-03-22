@@ -13,7 +13,7 @@ En utilisant Postgresql
 
 - Utiliser l'installation de Frank (mettre les bonnes valeurs dans application.yml)
 
-## Start the server
+## Démarrer le serveur
 
 Configurer la bdd dans [application.yml](./src/main/resources/application.yml) avec la bdd choisie. Démarrer le serveur Spring Boot ([http://localhost:8008](http://localhost:8008)):
 
@@ -25,15 +25,25 @@ Configurer la bdd dans [application.yml](./src/main/resources/application.yml) a
 gradlew bootRun
 ```
 
+## Exécuter les tests
+
+Des tests unitaires vérifie que vos endpoints REST fonctionnent correctement. Pour les exécuter :
+
+```bash
+# Linux & MacOS
+./gradlew test
+
+# Windows
+gradlew test
+```
+
 ## Exercice
 
-```puml
-class Car
+Pour travailler les relations, les transactions, et revoir les contrôleurs, nous allons développer l'application "cities", qui met en relation des pays, régions, et villes. Des utilisateurs peuvent "follow" des villes :
 
-Driver - Car : drives >
-Car *- Wheel : have 4 >
-Car -- Person : < owns
-```
+![ER diagram](../diagrams/renault-digital-2020-formation-java-23-24-25-mars-2020.svg)
+
+Le backend est à développer en TDD : chaque test unitaire vérifie le bon fonctionnement des différentes parties. Lors de la journée en commun du mercredi, nous allons ajouter le frontend nécessaire pour appeler le backend.
 
 ### Partie 1 - `Country` - Introduction
 
@@ -132,18 +142,18 @@ Créer un REST controlleur avec les URLs suivants :
 - spring web
     - context web : https://www.baeldung.com/spring-web-contexts
 - hibernate / jpa
-    - TODO add @enumerated
+    - add @enumerated
     - @NotNull vs @Column(nullable) : https://www.baeldung.com/hibernate-notnull-vs-nullable
-    - TODO spring.jpa.hibernate.ddl-auto=create-drop
+    - spring.jpa.hibernate.ddl-auto=create-drop
     - persistance context : https://www.baeldung.com/jpa-hibernate-persistence-context
-        - TODO entity manager : root manager
-        - TODO entity manager : isDirty
-        - TODO transaction scope vs extended scope
-        - TODO transaction scope : all component share same ctx
-        - TODO make example on that : https://github.com/eugenp/tutorials/tree/master/persistence-modules/hibernate5-2
-        - TODO session factory / save / refresh / flush / contains / dirty
-        - TODO refresh : reread, usefull for a clear
-        - TODO failed to lazily initialize a collection of role: User.followedCities, could not initialize proxy - no Session
+        - entity manager : root manager
+        - entity manager : isDirty
+        - transaction scope vs extended scope
+        - transaction scope : all component share same ctx
+        - make example on that : https://github.com/eugenp/tutorials/tree/master/persistence-modules/hibernate5-2
+        - session factory / save / refresh / flush / contains / dirty
+        - refresh : reread, usefull for a clear
+        - failed to lazily initialize a collection of role: User.followedCities, could not initialize proxy - no Session
     - unidirectionnal mapping : https://docs.oracle.com/cd/E19798-01/821-1841/bnbqk/index.html
     - bidirectionnal mapping : https://docs.oracle.com/cd/E19798-01/821-1841/bnbqj/index.html
     - one-to-one : https://www.baeldung.com/jpa-one-to-one
@@ -156,7 +166,7 @@ Créer un REST controlleur avec les URLs suivants :
         - owning side on the one side with @JoinColumn
         - owning side : https://www.baeldung.com/jpa-joincolumn-vs-mappedby
         - lazy eager : https://www.baeldung.com/hibernate-lazy-eager-loading
-        - TODO use transactions
+        - use transactions
     - many-to-many : https://www.baeldung.com/jpa-many-to-many
         - also : https://www.baeldung.com/hibernate-many-to-many
         - owning side : list, referencing side : list
@@ -166,8 +176,8 @@ Créer un REST controlleur avec les URLs suivants :
             - new entity way simpler
         - step 1 : fave city, step 2 : fave city with rating
     - fetchmode : https://www.baeldung.com/hibernate-fetchmode
-        - TODO select vs batch size
-        - TODO join fetch (eager only)
+        - select vs batch size
+        - join fetch (eager only)
         - https://www.baeldung.com/hibernate-fetchmode#fetchmode-vs-fetchtype
     - cascading : https://www.baeldung.com/jpa-cascade-types
         - TODO
